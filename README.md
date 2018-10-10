@@ -1,7 +1,9 @@
 # OkayapiDemo
-[小白接口官网](http://www.okayapi.com)
+[小白接口官网](http://www.okayapi.com) 
 使用Kotlin+Retrofit+Rx编写
+
 此demo根据Okayapi提供的接口文档，实现了大部分常用模块的接口调用
+
 更多内容请参考小白接口官网的文档
 
 ## 截图
@@ -9,7 +11,9 @@
 
 ## API接入凭证
 demo使用了演示账号api_demo的app_key和app_secrect
+
 如果需要使用邮件服务，请自行到官网注册一个账号，在后台配置邮件服务，并修改接入凭证
+
 详情请参考官网的开发文档
 
 ## 用户模块
@@ -59,6 +63,7 @@ demo使用了演示账号api_demo的app_key和app_secrect
 
 ## 邮件服务
 * 在小白后台配置邮件服务后，可以发送html邮件，发送和校验邮箱验证码
+
 注意：请自行注册一个账号，并在后台做好配置，再测试此功能
 
 ## 图形验证码
@@ -72,7 +77,7 @@ demo使用了演示账号api_demo的app_key和app_secrect
 * 根据输入的内容，显示条形码
 
 ## IP服务
-查询IP归属地信息
+* 查询IP归属地信息
 
 ## 拼音服务
 * 中文字符串转拼音首字母
