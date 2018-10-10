@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.benjaminwan.okayapidemo">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <application
+        android:name=".app.BaseApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_okayapi"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".UserActivity">
+        </activity>
+        <activity android:name=".MainMetaActivity">
+        </activity>
+        <activity android:name=".MainSetActivity">
+        </activity>
+        <activity android:name=".MainCounterActivity">
+        </activity>
+        <activity android:name=".UserMetaActivity">
+        </activity>
+        <activity android:name=".UserSetActivity">
+        </activity>
+        <activity android:name=".UserCounterActivity">
+        </activity>
+        <activity android:name=".LoggerActivity">
+        </activity>
+        <activity android:name=".CaptchaActivity">
+        </activity>
+        <activity android:name=".AvatarActivity">
+        </activity>
+        <activity android:name=".BarCodeActivity">
+        </activity>
+        <activity android:name=".IPInfoActivity">
+        </activity>
+        <activity android:name=".PinyinActivity">
+        </activity>
+        <activity android:name=".QrCodeActivity">
+        </activity>
+        <activity android:name=".CDNActivity">
+        </activity>
+        <activity android:name=".EmailActivity">
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainSetActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="发送"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="接收"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mSendMsgTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/black"
+                android:lines="10"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
+                android:text=""
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/mRecMsgTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/black"
+                android:lines="10"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
+                android:text=""
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/mMainSetAddBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="添加元素"/>
+
+            <Button
+                android:id="@+id/mMainSetClearBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="清空集合"/>
+
+            <Button
+                android:id="@+id/mMainSetCountBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="获取元素总数"/>
+
+            <Button
+                android:id="@+id/mMainSetDeleteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="删除元素"/>
+
+            <Button
+                android:id="@+id/mMainSetGetItemBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="获取元素"/>
+
+            <Button
+                android:id="@+id/mMainSetGetListBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="获取集合列表"/>
+
+            <Button
+                android:id="@+id/mMainSetQueryBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="查询集合列表"/>
+
+            <Button
+                android:id="@+id/mMainSetUpdateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="更新元素"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="说明：\n1.添加元素(自动添加2个,key=key_names)\n2.获取元素总数=2\n3.获取元素id=1\n4.获取集合列表\n5.查询集合列表\n6.更新元素id=1\n7.删除元素id=1\n8.清空集合key=key_names"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
