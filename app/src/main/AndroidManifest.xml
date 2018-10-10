@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-
     <application
         android:name=".app.BaseApp"
         android:allowBackup="true"
@@ -45,8 +44,6 @@
         <activity android:name=".IPInfoActivity">
         </activity>
         <activity android:name=".PinyinActivity">
-        </activity>
-        <activity android:name=".QrCodeActivity">
         </activity>
         <activity android:name=".CDNActivity">
         </activity>
