@@ -10,20 +10,29 @@ android {
         applicationId "com.benjaminwan.okayapidemo"
         minSdkVersion min_Sdk_Version
         targetSdkVersion target_Sdk_Version
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        demo {
+            keyAlias 'demo'
+            keyPassword 'okayapi'
+            storeFile file('demo.jks')
+            storePassword 'okayapi'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.demo
         }
     }
     applicationVariants.all { variant ->
-        if (variant.buildType.name != "debug") {//防止AS无法安装debug包(apk)
+        /*if (variant.buildType.name != "debug") {//防止AS无法安装debug包(apk)
             variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
-        }
+        }*/
         variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
             if (variant.buildType.name.equals('release')) {
                 apkData.outputFileName = "OkayapiDemo_v${variant.versionName}.apk"

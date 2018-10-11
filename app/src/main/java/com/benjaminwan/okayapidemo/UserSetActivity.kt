@@ -49,11 +49,9 @@ class UserSetActivity : RxAppCompatActivity(), View.OnClickListener {
                                     mUserLoginStateTv.text = "登录状态：用户已登录"
                                     isLogin = true
                                 }
-                                1 -> {
+                                else -> {
                                     mUserLoginStateTv.text = "登录状态：未登录，或登录态已过期"
                                     isLogin = false
-                                }
-                                else -> {
                                 }
                             }
                         }

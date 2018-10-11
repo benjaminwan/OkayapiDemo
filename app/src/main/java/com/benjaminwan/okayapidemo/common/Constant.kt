@@ -7,6 +7,8 @@ const val APP_SECRECT = "4c1402596e4cd017eeaO670df6f8B6783475b4ac8A32B4900f20abP
 
 //prefs key
 const val PREFS = "okayapidemo"
+const val KEY_SP_USER_NAME = "sp_user_name"//存储最后一次登录的username
+const val KEY_SP_USER_PASS = "sp_user_pass"//存储最后一次登录的password
 const val KEY_SP_UUID = "sp_uuid"//存储最后一次登录的uuid
 const val KEY_SP_TOKEN = "sp_token"//存储最后一次登录的token
 
@@ -17,6 +19,7 @@ const val VISIABLE_PUBLIC = "public"
 
 //计数器类型
 typealias CounterTpye = String
+
 const val HOUR: CounterTpye = "hour"
 const val DAY: CounterTpye = "day"
 const val WEEK: CounterTpye = "week"
@@ -26,6 +29,7 @@ const val FOREVER: CounterTpye = "forever"
 
 //日志级别
 typealias LogTpye = String
+
 const val ERROR: LogTpye = "ERROR"
 const val WARNING: LogTpye = "WARNING"
 const val NOTICE: LogTpye = "NOTICE"

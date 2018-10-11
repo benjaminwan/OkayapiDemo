@@ -209,6 +209,13 @@
                 android:layout_margin="@dimen/btn_margin"
                 android:text="修改用户扩展信息"/>
 
+            <Button
+                android:id="@+id/mClearUuidBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/btn_margin"
+                android:text="清除本地存储的uuid和token"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

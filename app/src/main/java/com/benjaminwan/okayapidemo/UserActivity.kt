@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import com.benjaminwan.okayapidemo.common.*
+import com.benjaminwan.okayapidemo.data.UserInfo
 import com.benjaminwan.okayapidemo.data.api.UserApi
 import com.benjaminwan.okayapidemo.data.protocol.user.*
 import com.benjaminwan.okayapidemo.data.request.user.*
 import com.benjaminwan.okayapidemo.net.RetrofitFactory
 import com.benjaminwan.okayapidemo.utils.AppPrefsUtils
+import com.benjaminwan.okayapidemo.utils.UserPrefsUtils
 import com.google.gson.Gson
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_user.*
@@ -29,14 +31,13 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                         }
                     }, this@UserActivity)
         }
-        val uuid = AppPrefsUtils.getString(KEY_SP_UUID)
-        val token = AppPrefsUtils.getString(KEY_SP_TOKEN)
-        if (uuid.isNotEmpty()) {
-            mLastUuidEt.text = uuid
-        }
-        if (token.isNotEmpty()) {
-            mLastTokenEt.text = token
-        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val userInfo = UserPrefsUtils.getUserInfo()
+        updateUserInfoView(userInfo)
     }
 
     private fun initViews() {
@@ -47,6 +48,16 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
         mCheckBtn.setOnClickListener(this)
         mProfileBtn.setOnClickListener(this)
         mUpdateExtInfoBtn.setOnClickListener(this)
+        mClearUuidBtn.setOnClickListener(this)
+    }
+
+    private fun updateUserInfoView(userInfo: UserInfo) {
+        userInfo.apply {
+            mUsernameEt.setText(userName)
+            mPasswordEt.setText(userPassword)
+            mLastUuidEt.setText(uuid)
+            mLastTokenEt.setText(token)
+        }
     }
 
     override fun onClick(view: View): Unit {
@@ -59,6 +70,7 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
 
                 if (mPasswordEt.text.toString().isEmpty()) {
                     toast("请填写密码")
+                    return
                 }
 
                 RetrofitFactory.create(UserApi::class.java)
@@ -70,13 +82,15 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                         }, this)
             }
             R.id.mLoginBtn -> {
-                if (mUsernameEt.text.toString().isEmpty()) {
+                val username = mUsernameEt.text.toString()
+                if (username.isEmpty()) {
                     toast("请填写用户名")
                     return
                 }
-
-                if (mPasswordEt.text.toString().isEmpty()) {
+                val password = mPasswordEt.text.toString()
+                if (password.isEmpty()) {
                     toast("请填写密码")
+                    return
                 }
 
                 RetrofitFactory.create(UserApi::class.java)
@@ -84,15 +98,11 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                         .execute(object : BaseSubscriber<UserLoginMsg>() {
                             override fun onNext(t: UserLoginMsg) {
                                 mRecMsgTv.LogMsg(t.toString())
-                                AppPrefsUtils.putString(KEY_SP_UUID, t.data.uuid)
-                                AppPrefsUtils.putString(KEY_SP_TOKEN, t.data.token)
-                                if (t.data.uuid.isNotEmpty()) {
-                                    mLastUuidEt.text = t.data.uuid
-                                }
-
-                                if (t.data.token.isNotEmpty()) {
-                                    mLastTokenEt.text = t.data.token
-                                }
+                                val uuid = t.data.uuid
+                                val token = t.data.token
+                                val userInfo = UserInfo(username, password, uuid, token)
+                                UserPrefsUtils.putUserInfo(userInfo)//存储
+                                updateUserInfoView(userInfo)//界面刷新
                             }
                         }, this)
 
@@ -102,6 +112,7 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                 val token = AppPrefsUtils.getString(KEY_SP_TOKEN)
                 if (uuid.isEmpty() or token.isEmpty()) {
                     toast("用户未登录")
+                    return
                 }
 
                 RetrofitFactory.create(UserApi::class.java)
@@ -109,22 +120,26 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                         .execute(object : BaseSubscriber<UserCheckMsg>() {
                             override fun onNext(t: UserCheckMsg) {
                                 mRecMsgTv.LogMsg(t.toString())
-                                val ret_msg = when (t.data.err_code) {
-                                    0 -> {
-                                        "用户已登录"
-                                    }
-                                    1 -> {
-                                        "未登录，或登录态已过期"
+                                val ret_msg = when (t.ret) {
+                                    200 -> {
+                                        when (t.data.err_code) {
+                                            0 -> {
+                                                "用户已登录"
+                                            }
+                                            else -> {
+                                                "未登录，或登录态已过期"
+                                            }
+                                        }
                                     }
                                     else -> {
-                                        "未知错误"
+                                        t.msg
                                     }
+
                                 }
                                 mRecMsgTv.LogMsg(ret_msg)
 
                             }
-                        }
-                                , this)
+                        }, this)
             }
 
             R.id.mProfileBtn -> {
@@ -132,6 +147,7 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                 val token = AppPrefsUtils.getString(KEY_SP_TOKEN)
                 if (uuid.isEmpty() or token.isEmpty()) {
                     toast("用户未登录")
+                    return
                 }
 
                 RetrofitFactory.create(UserApi::class.java)
@@ -149,6 +165,7 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                 val token = AppPrefsUtils.getString(KEY_SP_TOKEN)
                 if (uuid.isEmpty() or token.isEmpty()) {
                     toast("用户未登录")
+                    return
                 }
                 val ext_map = hashMapOf("nickname" to "testname", "age" to 22, "hello" to "world", "up" to "down")
                 val ext_info = Gson().toJson(ext_map)
@@ -161,7 +178,12 @@ class UserActivity : RxAppCompatActivity(), View.OnClickListener {
                             }
                         }, this)
             }
-
+            R.id.mClearUuidBtn -> {
+                AppPrefsUtils.putString(KEY_SP_UUID, "")
+                AppPrefsUtils.putString(KEY_SP_TOKEN, "")
+                mLastUuidEt.text = "空"
+                mLastTokenEt.text = "空"
+            }
             else -> {
             }
         }

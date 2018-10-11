@@ -17,14 +17,14 @@ class MainActivity : RxAppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
         val uuid = AppPrefsUtils.getString(KEY_SP_UUID)
         val token = AppPrefsUtils.getString(KEY_SP_TOKEN)
-        if (uuid.isNotEmpty()) {
-            mLastUuidEt.setText(uuid)
-        }
-        if (token.isNotEmpty()) {
-            mLastTokenEt.setText(token)
-        }
+        mLastUuidEt.setText(uuid)
+        mLastTokenEt.setText(token)
     }
 
     private fun initViews() {
