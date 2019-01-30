@@ -16,11 +16,12 @@ buildscript {
     ext.take_photo_version = "4.0.3"
     ext.alert_view_version = "1.0.3"
     repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -30,6 +31,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
         jcenter()
     }
