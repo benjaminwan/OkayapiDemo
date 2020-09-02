@@ -1,7 +1,7 @@
 package com.benjaminwan.okayapidemo.common
 
 //以下使用演示版账号api_demo的接入凭证
-const val SERVER_ADDRESS = "http://api.okayapi.com/"
+const val SERVER_ADDRESS = "http://api.yesapi.com/"
 const val APP_KEY = "16BD4337FB1D355902E0502AFCBFD4DF"
 const val APP_SECRECT = "4c1402596e4cd017eeaO670df6f8B6783475b4ac8A32B4900f20abP2159711ad"
 

@@ -29,16 +29,22 @@ android {
             signingConfig signingConfigs.demo
         }
     }
-    applicationVariants.all { variant ->
-        /*if (variant.buildType.name != "debug") {//防止AS无法安装debug包(apk)
-            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
-        }*/
-        variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
-            if (variant.buildType.name.equals('release')) {
-                apkData.outputFileName = "OkayapiDemo_v${variant.versionName}.apk"
-            } else if (variant.buildType.name.equals('debug')) {
-                apkData.outputFileName = "OkayapiDemo_v${variant.versionName}-debug.apk"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "${rootProject.name}-${defaultConfig.versionName}-${variant.buildType.name}.apk"
             }
+    }
+    configurations {
+        all {
+            exclude group: 'xpp3', module: 'xpp3'
         }
     }
 }

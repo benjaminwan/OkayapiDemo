@@ -1,7 +1,7 @@
 package com.benjaminwan.okayapidemo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.benjaminwan.okayapidemo.common.EXT_AVATAR_SHOW
 import com.benjaminwan.okayapidemo.utils.GlideUtils
 import kotlinx.android.synthetic.main.activity_avatar.*
